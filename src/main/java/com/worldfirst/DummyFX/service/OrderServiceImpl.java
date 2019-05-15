@@ -53,7 +53,9 @@ public class OrderServiceImpl implements OrderService{
     public Order cancel(Long id,List<Order> orders) {
         Order matchingObject = orders.stream().
                                 filter(p -> p.getId().equals(id)).findAny().orElse(null);
-        matchingObject.setStatus(Order.Status.CANCELLED);
+        if(matchingObject != null){
+            matchingObject.setStatus(Order.Status.CANCELLED);
+        }
         return matchingObject;
     }
 
