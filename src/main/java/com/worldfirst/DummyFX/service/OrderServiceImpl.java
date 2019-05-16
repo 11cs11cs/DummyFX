@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService{
     
     @Override
     public Order register(Order order,List<Order> orders){
-        Long id = orders.stream().map(o -> o.getId()).max(Long::compareTo).get();
+        Long id = orders.stream().map(o -> o.getId()).max(Long::compareTo).orElse(new Long(0));
         double price = Double.parseDouble(env.getProperty("price"));
         order.setId(id+1);
         order.setPrice(price);
@@ -69,7 +69,8 @@ public class OrderServiceImpl implements OrderService{
         return getMatch(new ArrayList<>(orders),new ArrayList<>());
     }
     /*
-    * If find matched pair, add they into the pair list, then recursive the process until no more pairing orders can be found.
+    * If find matched pair, add they into the pair list, 
+    * then recursive the process until no more pairing orders can be found.
     * return the pair list.
     */
     private List<Order[]> getMatch(List<Order> orders,List<Order[]> pairs){
@@ -91,8 +92,9 @@ public class OrderServiceImpl implements OrderService{
         return pairs;
     }
     /*
-    * If find matched pair, remove them from the orginal list, then recursive the process until no more pairing orders can be found.
-    * return the orginal list.
+    * If find matched pair, remove them from the copied order list, 
+    * then recursive the process until no more pairing orders can be found.
+    * return the copied order list.
     */
     private List<Order> liveNotMatch(List<Order> orders){
         if(orders.size()>1){
