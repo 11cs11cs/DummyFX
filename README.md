@@ -16,7 +16,7 @@ It will return the registered order.</p>
 
 <b>Cancel an order:</b>
 <p>Run command: curl -X PATCH http://localhost:8080/orders/1</br>
-It will return the cancelled order.</p>
+It will return the cancelled order. The status of cancelled order is CANCELLED.</p>
 
 <b>To view the summary regarding live not matched orders:</b>
 <p>Run command: curl -X GET http://localhost:8080/orders/notmatched</br>
@@ -28,7 +28,7 @@ It will return a list of live not matched orders.</p>
 Or request from browser: http://localhost:8080/orders/matched</br>
 It will return a list of matched order pairs. Each pair contains 2 live matched orders.</p>
 
-<h2>Matched orders condition</h2>
+<h2>Matched orders assumption</h2>
 <p>1. Order A, Order B are both LIVE.</br>
 2. User Id not same (not the same user)</br>
 3. Order Type not same (if user1 is BIT, then user2 is ASK, and vice versa)</br>
@@ -40,10 +40,6 @@ It will return a list of matched order pairs. Each pair contains 2 live matched 
 
 <h2>Test</h2>
 <p>Tests using MockMvc to send GET,POST,PATCH request with parameters.</br>
-getOrdersAPI()
-registerOrderAPI()
-cancelOrderAPI()
-matchedOrdersAPI()
-liveNotMatchedOrdersAPI()</br>
-are written in TestOrderController.java in the test package.</p>
+All the endpoints API testing have been written in TestOrderController.java in the test package.</br>
+Also the empty data situation has been considered.</p>
 
